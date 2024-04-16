@@ -11,7 +11,7 @@ const Navbar = () => {
 
     return(
         <div className=" bg-black sticky z-50 top-0 inset-x-0 h-16 text-white">
-            <header className=" relative bg-black">
+            <header className=" relative bg-black border-b border-gray-200">
                 <MaxWidthWarpper>
                     <div className=""> {/*add border here if needed border-b border-gray-200 this classname */}
                         <div className="flex h-16 items-center">
