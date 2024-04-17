@@ -3,6 +3,7 @@ import MaxWidthWarpper from "./MaxWidthWrapper";
 import Link from "next/link";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
+import MobileNav from "./MobileNav";
 
 
 const Navbar = () => {
@@ -16,7 +17,7 @@ const Navbar = () => {
                     <div className=""> {/*add border here if needed border-b border-gray-200 this classname */}
                         <div className="flex h-16 items-center">
                             {/* TODO: Mobile nav */}
-
+                            <MobileNav/>
                             <div className=" ml-4 flex lg:ml-0">
                                 <Link href='/'>
                                     <Icons.logo className="h-10 w-10" />
@@ -31,7 +32,7 @@ const Navbar = () => {
                             {/** conditional statements where sign-in singout loning create user and other related details are shown if the user is new or already existed */}
                             <div className=" ml-auto flex items-center">
                                 <div className=" hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    {user? null : (<Link href='/login' className={buttonVariants({
+                                    {user? null : (<Link href='/sign-in' className={buttonVariants({
                                         variant: 'ghost'
                                     })}>Sign in</Link>)}
 
@@ -39,9 +40,9 @@ const Navbar = () => {
                                     aria-hidden = 'true'
                                     />)}
 
-                                    {user? <p></p> : (<Link href='/signup' className={buttonVariants({
+                                    {user? <p></p> : (<Link href='/pricing' className={buttonVariants({
                                         variant: 'ghost'
-                                    })}>Create Account</Link>)}
+                                    })}>Pricing</Link>)}
 
                                     {user ? (<span className=" h-6 w-px bg-gray-200"
                                     aria-hidden = 'true'

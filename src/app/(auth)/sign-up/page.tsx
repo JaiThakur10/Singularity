@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {toast} from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -13,8 +13,10 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
+import { ArrowRight } from 'lucide-react'
 
-export default function LoginPage() {
+
+export default function SignupPage() {
 
   const router = useRouter()
 
@@ -26,30 +28,31 @@ export default function LoginPage() {
   const [user,setUser] =useState({
     email: "",
     password: "",
+    username: ""
   })
 
   const [buttonDisabled, setButtonDisabled] = useState(false)
   const [loading,setLoading] = useState(false)
 
-  const onLogin = async () => {
+  const onSignup = async () => {
     try {
       setLoading(true)
-      const response = await axios.post("/api/users/login",user)
+      const response = await axios.post("/api/sign-up",user)
 
-      console.log("Login Success", response.data);
-      router.push('/profile')
+      console.log("Signup Success", response.data);
+      router.push('/sign-in')
 
 
 
 
     } catch (error: any) {
-      console.log("Login failed");
+      console.log("Signup failed");
       toast.error(error.message)
     }
   }
 
   useEffect (() => {
-    if(user.email.length > 0 && user.password.length>0 ){
+    if(user.email.length > 0 && user.password.length>0 && user.username.length >0){
       setButtonDisabled(false)
     }else{
       setButtonDisabled(true)
@@ -58,15 +61,26 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-    <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-      Welcome to Singularity
+    <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200 mx-4">
+      Create an Account
     </h2>
     <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
-      <Link href='/login'>Login to Singularity if you can! </Link>
+      <Link 
+      className={buttonVariants({
+        variant: 'link',
+        className: "gap-1.5 text-blue-400"
+      })}
+      href='/sign-in'>Already have an account? Sign-in<ArrowRight className=' h-4 w-4' />
+      </Link>
     </p>
 
     <form className="my-8" onSubmit={handleSubmit}>
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+        <LabelInputContainer>
+          <Label htmlFor="firstname">First name</Label>
+          <Input id="firstname" placeholder="Tyler" type="text" value={user.username}
+      onChange={(e) => setUser({...user, username: e.target.value})}/>
+        </LabelInputContainer>
         
       </div>
       <LabelInputContainer className="mb-4">
@@ -79,13 +93,14 @@ export default function LoginPage() {
         <Input id="password" placeholder="••••••••" type="password" value={user.password}
       onChange={(e) => setUser({...user, password: e.target.value})}/>
       </LabelInputContainer>
+      
      
 
       <button
         className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
         type="submit"
-        onClick={onLogin}
-      >{buttonDisabled ? "Login" : "Loging"}
+        onClick={onSignup}
+      >{buttonDisabled ? "Sign up " : "Signing"}
         
         <BottomGradient />
       </button>
