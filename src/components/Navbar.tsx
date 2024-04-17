@@ -31,7 +31,7 @@ const Navbar = () => {
                             {/** conditional statements where sign-in singout loning create user and other related details are shown if the user is new or already existed */}
                             <div className=" ml-auto flex items-center">
                                 <div className=" hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    {user? null : (<Link href='/sign-in' className={buttonVariants({
+                                    {user? null : (<Link href='/login' className={buttonVariants({
                                         variant: 'ghost'
                                     })}>Sign in</Link>)}
 
@@ -39,7 +39,7 @@ const Navbar = () => {
                                     aria-hidden = 'true'
                                     />)}
 
-                                    {user? <p></p> : (<Link href='/sign-up' className={buttonVariants({
+                                    {user? <p></p> : (<Link href='/signup' className={buttonVariants({
                                         variant: 'ghost'
                                     })}>Create Account</Link>)}
 
