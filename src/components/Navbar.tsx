@@ -4,6 +4,7 @@ import Link from "next/link";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import MobileNav from "./MobileNav";
+import { ArrowRight } from "lucide-react";
 
 
 const Navbar = () => {
@@ -51,8 +52,11 @@ const Navbar = () => {
                                     {user ? null : (<div className=" flex lg:ml-6">
                                     <span className=" h-6 w-px bg-gray-200"
                                     aria-hidden = 'true'
-                                    />
-                                      </div> ) }
+                                    /></div> ) }
+                                    {user? null : (<Link href='/sign-in' className={buttonVariants({
+                                        variant: 'ghost',
+                                        className: ' bg-[#60A5FA]'
+                                    })}>Get Started <ArrowRight/></Link>)}
                                 </div>
                             </div>
                         </div>

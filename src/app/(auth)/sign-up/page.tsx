@@ -68,7 +68,7 @@ export default function SignupPage() {
       <Link 
       className={buttonVariants({
         variant: 'link',
-        className: "gap-1.5 text-blue-400"
+        className: "gap-1.5 text-[#87BEFB]"
       })}
       href='/sign-in'>Already have an account? Sign-in<ArrowRight className=' h-4 w-4' />
       </Link>
