@@ -3,6 +3,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Herosection from "@/components/Herosection";
 import { HeroParallel } from "@/components/HeroParallel";
+import RevealBoxes  from "@/components/RevealBoxes";
 
 
 
@@ -19,7 +20,7 @@ export default function Home() {
     
     <MaxWidthWarpper>
 
-     
+     <RevealBoxes/>
    
       <div className=" py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
         <h1 className=" text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl ">Welcome to the Demo Page of {' '}
