@@ -2,34 +2,38 @@ import { MessageArraySchema } from "@/lib/validators/message"
 import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from "@/lib/openai-stream"
 import { chatbotPrompt } from "@/app/helpers/constants/chatbot-prompt"
 
+
+
 export async function POST(req: Request) {
-    const { messages } = await req.json()  //json() is a method that reads the body of the request
-    const parsedMessages = MessageArraySchema.parse(messages)
-    const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
-        return {
-          role: message.isUserMessage ? 'user' : 'system',
-          content: message.text,
-        }
-      })
+  const { messages } = await req.json()
 
-      outboundMessages.unshift({
-        role: 'system',
-        content: chatbotPrompt,
-      })
+  const parsedMessages = MessageArraySchema.parse(messages)
 
-      const payload: OpenAIStreamPayload= {
-        model: 'gpt-3.5-turbo',
-        messages: outboundMessages,
-        temperature: 0.4,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-        max_tokens: 150,  //about 150 words
-        stream: true,
-        n: 1,
-      }
-      const stream = await OpenAIStream(payload)
+  const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
+    return {
+      role: message.isUserMessage ? 'user' : 'system',
+      content: message.text,
+    }
+  })
 
-      return new Response(stream)
-    
+  outboundMessages.unshift({
+    role: 'system',
+    content: chatbotPrompt,
+  })
+
+  const payload: OpenAIStreamPayload = {
+    model: 'gpt-3.5-turbo',
+    messages: outboundMessages,
+    temperature: 0.4,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    max_tokens: 150,
+    stream: true,
+    n: 1,
+  }
+
+  const stream = await OpenAIStream(payload)
+
+  return new Response(stream)
 }
