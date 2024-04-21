@@ -1,8 +1,10 @@
 import MaxWidthWarpper from "@/components/MaxWidthWrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react'
 import Herosection from "@/components/Herosection";
+import { HeroParallel } from "@/components/HeroParallel";
+
+
 
 
 
@@ -10,11 +12,14 @@ import Herosection from "@/components/Herosection";
 export default function Home() {
   return (
     <>
-     <main className="min-h-screen  antialiased bg-grid-white/[0.02] bg-black">
+     <main className="min-h-screen  antialiased bg-grid-white/[0.02] ">
     <Herosection/>
+    <HeroParallel/>
    </main>
     
     <MaxWidthWarpper>
+
+     
    
       <div className=" py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
         <h1 className=" text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl ">Welcome to the Demo Page of {' '}

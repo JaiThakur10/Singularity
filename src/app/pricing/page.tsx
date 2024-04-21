@@ -1,178 +1,170 @@
 'use client'
 
-import React from 'react'
+import MaxWidthWarpper from "@/components/MaxWidthWrapper"
+import { PLANS } from "@/config/stripe";
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
+import { Check, HelpCircle, Minus } from "lucide-react";
 
-const pricing =() => {
+
+const Pricing = () => {
+
+  const pricingItems = [
+    {
+      plan: 'Free',
+      tagline: 'For small side projects.',
+      quota: 20,
+      features: [
+        {
+          text: '5 pages per PDF',
+          footnote:
+            'The maximum amount of pages per PDF-file.',
+        },
+        {
+          text: '4MB file size limit',
+          footnote:
+            'The maximum file size of a single PDF file.',
+        },
+        {
+          text: 'Mobile-friendly interface',
+        },
+        {
+          text: 'Higher-quality responses',
+          footnote:
+            'Better algorithmic responses for enhanced content quality',
+          negative: true,
+        },
+        {
+          text: 'Priority support',
+          negative: true,
+        },
+      ],
+    },
+    {
+      plan: 'Pro',
+      tagline: 'For larger projects with higher needs.',
+      quota: PLANS.find((p) => p.slug === 'pro')!.quota,
+      features: [
+        {
+          text: '25 pages per PDF',
+          footnote:
+            'The maximum amount of pages per PDF-file.',
+        },
+        {
+          text: '16MB file size limit',
+          footnote:
+            'The maximum file size of a single PDF file.',
+        },
+        {
+          text: 'Mobile-friendly interface',
+        },
+        {
+          text: 'Higher-quality responses',
+          footnote:
+            'Better algorithmic responses for enhanced content quality',
+        },
+        {
+          text: 'Priority support',
+        },
+      ],
+    },
+  ]
+  
   return (
-    <section className="relative overflow-hidden py-10">
-      <div className="relative mx-auto max-w-7xl px-4">
-        <div className="mx-auto mb-24 max-w-2xl text-center lg:max-w-5xl">
-          <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
-            Pricing.
+    <>
+      <MaxWidthWarpper className=" mb-8 mt-24 text-center max-w-5xl">
+        <div className=" mx-auto mb-10 sm:max-w-lg">
+          <h1 className=" text-6xl font:bold sm:text-7xl">
+            Pricing
           </h1>
-          <p className="text-lg text-gray-500">
-            Whether you're just trying our services or need more, we've got you covered.
+          <p className=" mt-5 text-gray-600 sm:text-lg">
+            Whether you&apos;re just trying out our services or need
+            more, we&apos; got you covered!
           </p>
         </div>
-        <div className="mx-auto max-w-5xl">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full lg:-mr-2 lg:w-1/3">
-              <div className="mx-auto max-w-sm rounded-md border border-gray-200 bg-white pb-20 pl-5 pr-8 pt-6 lg:pb-8">
-                <span className="mb-2 block text-sm font-semibold text-gray-400">PREMIUM</span>
-                <span className="flex items-end">
-                  <span className="text-4xl font-extrabold leading-none">$150</span>
-                  <span className="text-sm font-semibold">/month</span>
-                </span>
-                <div className="mt-7 border-t border-gray-100 pt-5">
-                  <ul className="mb-10">
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">No Discount</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Basic Support</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Ads Banner Free</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Design Style</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Component Library</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">All limited links</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Own analytics platform</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Chat support</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Optimize hashtags</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Unlimited users</span>
-                    </li>
-                  </ul>
-                  <button
-                    type="button"
-                    className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Choose Plan
-                  </button>
+        <div className=" pt-12 grid grid-cols-1 gap-10 lg:grid-cols-2">
+          <TooltipProvider>
+            {pricingItems.map(({plan, tagline, quota, features}) => {
+              const price = PLANS.find((p) => p.slug === plan.toLowerCase())?.price.amount || 0
+              return <div key = {plan} className={cn(' relative rounded-2xl bg-white shadow-lg',{
+                "border-2 border-blue-600 shadow-blue-200" : plan === "Pro",
+                "border border-gray-200": plan !== "Pro"
+              })}>
+                {plan === "Pro" &&(
+                  <div className=" absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 px-3 py-2 text-sm font-medium text-white">
+                    Upgrade Now
+                  </div>
+                )}
+                <div className=" p-5">
+                  <h3 className=" my-3 text-center font-serif text-3xl font-bold">
+                    {plan}
+                  </h3>
+                  <p className=" text-gray-500">{tagline}</p>
+                  <p className=" my-5 font-serif text-6xl font-semibold">₹{price}</p>
+                  <p className=" text-gray-500">per month</p>
                 </div>
-              </div>
-            </div>
-            <div className="-mt-4 w-full lg:-mt-0 lg:w-1/3">
-              <div className="pt-22 relative mx-auto max-w-sm rounded-lg bg-black px-10 pb-16 ">
-                <div className="absolute left-1/2 top-0 inline-flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full bg-white p-2">
-                  <div className="flex-shrink-0 rounded-full bg-black px-5 py-4 text-sm font-semibold uppercase text-white">
-                    Most Popular
+                <div className=" flex h-20 items-center justify-center border-b border-t border-gray-200 bg-gray-50">
+                  <div className=" flex items-center space-x-1">
+                    <p> {quota.toLocaleString()} pages/mo inculded </p>
+
+                    <Tooltip delayDuration={300}>
+                      <TooltipTrigger className=" cursor-default ml-1.5">
+                        <HelpCircle className=" h-4 w-4 text-zinc-500" />
+                      </TooltipTrigger>
+                      <TooltipContent className=" w-80 p-2">
+                        How many pages you want to upload
+                      </TooltipContent>
+                    </Tooltip>
+
                   </div>
                 </div>
-                <span className="mb-2 block pt-10 text-sm font-semibold text-white">GOLD</span>
-                <span className="flex items-end text-white">
-                  <span className="text-4xl font-extrabold leading-none">$100</span>
-                  <span className="text-sm font-semibold">/month</span>
-                </span>
-                <div className="mt-7 border-t border-orange-500 pt-5">
-                  <ul className="mb-10">
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">No Discount</span>
+
+                <ul className=" my-10 space-y-5 px-8">
+                  {features.map(({text, footnote, negative}) =>(
+                    <li key={text} className=" flex space-x-5">
+                      <div className="flex-shrink-0">
+                        {negative? (
+                          <Minus className="h-6 w-6 text-gray-300"/>
+
+                        ):(
+                          <Check className=" h-6 w-6 text-blue-500" />
+                        )}
+                      </div>
+                      {footnote ? (
+                        <div className=" flex items-center space-x-1">
+                          <p className={cn('text-gray-400',{
+                            'text-gray-600': negative,
+                          })}>
+                            {text}
+                          </p>
+                          <Tooltip delayDuration={300}>
+                      <TooltipTrigger className=" cursor-default ml-1.5">
+                        <HelpCircle className=" h-4 w-4 text-zinc-500" />
+                      </TooltipTrigger>
+                      <TooltipContent className=" w-80 p-2">
+                        {footnote}
+                      </TooltipContent>
+                    </Tooltip>
+                        </div>
+                      ) : (
+                        <p className={cn('text-gray-400',{
+                          'text-gray-600': negative,
+                        })}>
+                          {text}
+                        </p>
+                      )}
                     </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Basic Support</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Ads Banner Free</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Design Style</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Component Library</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">All limited links</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Own analytics platform</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Chat support</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Optimize hashtags</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-white">Unlimited users</span>
-                    </li>
-                  </ul>
-                  <button
-                    type="button"
-                    className="rounded-md bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    Choose Plan
-                  </button>
-                </div>
+                  ))}
+                </ul>
               </div>
-            </div>
-            <div className="-mt-4 w-full lg:-ml-2 lg:-mt-0 lg:w-1/3">
-              <div className="rounded-b-5xl lg:rounded-r-5xl mx-auto max-w-sm border border-gray-200 bg-white pb-8 pl-8 pr-5 pt-12 lg:rounded-b-none lg:pt-6">
-                <span className="mb-2 block text-sm font-semibold text-gray-400">PREMIUM</span>
-                <span className="flex items-end">
-                  <span className="text-4xl font-extrabold leading-none">$150</span>
-                  <span className="text-sm font-semibold">/month</span>
-                </span>
-                <div className="mt-7 border-t border-gray-100 pt-5">
-                  <ul className="mb-10">
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">No Discount</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Basic Support</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Ads Banner Free</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Design Style</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Component Library</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">All limited links</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Own analytics platform</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Chat support</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Optimize hashtags</span>
-                    </li>
-                    <li className="mb-6 flex items-center">
-                      <span className="ml-2 text-sm text-gray-900">Unlimited users</span>
-                    </li>
-                  </ul>
-                  <button
-                    type="button"
-                    className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                  >
-                    Choose Plan
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+            }
+            )}
+          </TooltipProvider>
         </div>
-      </div>
-    </section>
+      </MaxWidthWarpper>
+    </>
   )
+
 }
 
-export default pricing;
+export default Pricing;
