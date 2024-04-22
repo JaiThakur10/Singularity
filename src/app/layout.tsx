@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className=" bg-dark h-full ">
+    <html lang="en" className=" h-full bg-black ">
       <AuthProvider>
      <Providers>
      <body className={cn(" relative h-full font-sans antialiased", inter.className)}>
