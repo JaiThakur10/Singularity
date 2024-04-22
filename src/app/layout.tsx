@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import AuthProvider from "@/context/AuthProvider";
 import Chat from "@/components/Chat";
 import Providers from "@/components/Providers";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         <div className=" flex-grow flex-1">{children}</div>
         <Chat/>
         </main>
+        <Toaster />
       </body>
      </Providers>
       </AuthProvider>
