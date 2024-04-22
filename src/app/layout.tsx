@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/context/AuthProvider";
-import Chatbot from "@/components/Chatbot";
 import Chat from "@/components/Chat";
 import Providers from "@/components/Providers";
 
@@ -21,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="  h-full">
+    <html lang="en" className=" bg-dark h-full ">
       <AuthProvider>
      <Providers>
      <body className={cn(" relative h-full font-sans antialiased", inter.className)}>

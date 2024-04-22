@@ -26,6 +26,10 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+          dark: {
+            DEFAULT: 'black', // Adjust this color to your preferred dark mode background color
+            // Add more custom dark mode colors here if needed
+          },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
