@@ -179,7 +179,19 @@ export default function SignUpForm() {
             </Button>
           </form>
         </Form>
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+        
+        <div className=' relative mt-6'>
+          <div
+          aria-hidden= 'true'
+          className=' absolute inset-0 flex items-center'>
+            <span className=' bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full'/>
+          </div>
+          <div className=' relative flex justify-center text-xs uppercase '>
+            <span className=' bg-background px-2 text-muted-foreground'>
+              or
+            </span>
+          </div>
+        </div>
         
       </div>
 
