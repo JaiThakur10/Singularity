@@ -1,18 +1,31 @@
+'use client'
 import { Icons } from "./Icons";
 import MaxWidthWarpper from "./MaxWidthWrapper";
 import Link from "next/link";
 import NavItems from "./NavItems";
-import { buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import MobileNav from "./MobileNav";
 import { ArrowRight } from "lucide-react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options"
+import { signOut, useSession } from "next-auth/react";
+import { User } from "next-auth";
+import { useEffect } from "react";
+import router from "next/router";
 
 
-const Navbar = async () => {
 
-    const session = await getServerSession(authOptions)
-    const user = null
+const Navbar =  () => {
+
+    const {data: session} = useSession()
+    const user: User = session?.user as User
+
+    
+        
+     
+    
+
+   
+
+    
 
     return(
         <div className=" bg-black sticky z-50 top-0 inset-x-0 h-16 text-white">
@@ -37,27 +50,40 @@ const Navbar = async () => {
                             {/** conditional statements where sign-in singout loning create user and other related details are shown if the user is new or already existed */}
                             <div className=" ml-auto flex items-center">
                                 <div className=" hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    {user? null : (<Link href='/sign-in' className={buttonVariants({
-                                        variant: 'ghost'
-                                    })}>Sign in</Link>)}
+                                    {session? (<>
+                                    
+                                    <span className='mr-4'>Welcome {user?.username || user?.email} !</span>
+                                    <Button className={buttonVariants({
+                                    variant: 'ghost',
+                                    className: 'bg-black'
+                                })}
+                                    onClick={() => signOut()}
+                                    
+                                    >Sign Out</Button>
+                                    </>) : (<Link href='/sign-in' className={buttonVariants({
+                                    variant: 'ghost'
+                                  })}>Sign in</Link>)}
 
-                                    {user? null : (<span className=" h-6 w-px bg-gray-200"
+                                    <span className=" h-6 w-px bg-gray-200"
                                     aria-hidden = 'true'
-                                    />)}
+                                    />
 
-                                    {user? <p></p> : (<Link href='/pricing' className={buttonVariants({
+                                    <Link href='/pricing' className={buttonVariants({
                                         variant: 'ghost'
-                                    })}>Pricing</Link>)}
+                                    })}>Pricing</Link>
 
-                                    {user ? (<span className=" h-6 w-px bg-gray-200"
+                                    <span className=" h-6 w-px bg-gray-200"
                                     aria-hidden = 'true'
-                                    />) :null }
+                                    />
 
-                                    {user ? null : (<div className=" flex lg:ml-6">
+                                    {session ? null : (<div className=" flex lg:ml-6">
                                     <span className=" h-6 w-px bg-gray-200"
                                     aria-hidden = 'true'
                                     /></div> ) }
-                                    {user? null : (<Link href='/sign-in' className={buttonVariants({
+                                    {session? (<Link href='/UserDashboard' className={buttonVariants({
+                                        variant: 'ghost',
+                                        className: ' bg-[#60A5FA]'
+                                    })}>Let&apos; Design <ArrowRight/></Link>) : (<Link href='/sign-up' className={buttonVariants({
                                         variant: 'ghost',
                                         className: ' bg-[#60A5FA]'
                                     })}>Get Started <ArrowRight/></Link>)}

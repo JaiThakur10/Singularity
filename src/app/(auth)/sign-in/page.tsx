@@ -67,16 +67,7 @@ export default function SignInForm() {
     setIsSubmitting(false)
   };
 
-  const { data: session } = useSession()
-  if (session) {
-    return (
-      <>
-      <UserDashboard/>
-        Signed in as {session.user.email} <br />
-        <Button onClick={() => signOut()}>Sign out</Button>
-      </>
-    )
-  }
+  
 
   return (
     <div className="flex justify-center h-[300px] bg-white">
