@@ -7,6 +7,7 @@ import AuthProvider from "@/context/AuthProvider";
 import Chat from "@/components/Chat";
 import Providers from "@/components/Providers";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
      <Providers>
      <body className={cn(" relative h-full font-sans antialiased", inter.className)}>
         <main className=" relative flex flex-col min-h-screen">
+          <Analytics/>
           <Navbar/>
         <div className=" flex-grow flex-1">{children}</div>
         <Chat/>
