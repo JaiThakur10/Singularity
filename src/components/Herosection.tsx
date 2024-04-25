@@ -40,7 +40,7 @@ function Herosection() {
       <p></p>
       <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10 ">
         Welcome to Singularity, the platform where you can get a website for yourself.
-        If you are designer and dont know how to code then we've got you covered 
+        If you are designer and dont know how to code then weve got you covered 
         vist the playground and desgin a webpage for yourself then leave the coding part to us!
       </p>
       <div className="  w-full flex ">

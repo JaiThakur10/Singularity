@@ -1,55 +1,18 @@
 'use client';
 
-
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
-
-import { ApiResponse } from '@/types/ApiResponse';
-import { zodResolver } from '@hookform/resolvers/zod';
-import axios, { AxiosError } from 'axios';
-import { Loader2, RefreshCcw } from 'lucide-react';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
-import React, { useCallback, useEffect, useState } from 'react';
+
 import { useForm } from 'react-hook-form';
 
 
 function UserDashboard() {
-
-
-  const { toast } = useToast();
-
   
 
   const { data: session } = useSession();
 
-  const form = useForm({
-    
-  });
+  
 
-  const { register, watch, setValue } = form;
-
-
-  const fetchAcceptMessages = useCallback(async () => {
-   
-    try {
-      const response = await axios.get<ApiResponse>('/api/accept-messages');
-      
-    } catch (error) {
-      const axiosError = error as AxiosError<ApiResponse>;
-      toast({
-        title: 'Error',
-        description:
-          axiosError.response?.data.message ??
-          'Failed to fetch message settings',
-        variant: 'destructive',
-      });
-    } 
-  }, [setValue, toast]);
-
- 
 
   // Fetch initial state from the server
 
@@ -63,8 +26,6 @@ function UserDashboard() {
 
   const { username } = session.user as User;
 
-  const baseUrl = `${window.location.protocol}//${window.location.host}`;
-  const profileUrl = `${baseUrl}/u/${username}`;
 
   
 
