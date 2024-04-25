@@ -40,6 +40,7 @@ const UserSchema: Schema<User> = new Schema({
         type: Boolean,
         default: false,
     },
+    
    
 })
 

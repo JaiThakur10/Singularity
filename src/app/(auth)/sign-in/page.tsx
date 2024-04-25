@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { signIn } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import {
   Form,
   FormField,
@@ -19,6 +19,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { signInSchema } from '@/schemas/signInSchema';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
+import UserDashboard from '@/app/(app)/UserDashboard/page';
 
 export default function SignInForm() {
 
@@ -47,7 +48,7 @@ export default function SignInForm() {
     if (result?.error) {
       if (result.error === 'CredentialsSignin') {
         toast({
-          title: 'Login Failed',
+          title: 'Sign in Failed',
           description: 'Incorrect username or password',
           variant: 'destructive',
         });
@@ -65,6 +66,17 @@ export default function SignInForm() {
     }
     setIsSubmitting(false)
   };
+
+  const { data: session } = useSession()
+  if (session) {
+    return (
+      <>
+      <UserDashboard/>
+        Signed in as {session.user.email} <br />
+        <Button onClick={() => signOut()}>Sign out</Button>
+      </>
+    )
+  }
 
   return (
     <div className="flex justify-center h-[300px] bg-white">
@@ -133,6 +145,10 @@ export default function SignInForm() {
             </span>
           </div>
         </div>
+
+        <Button
+        onClick={() =>signIn("google")}
+        >Google</Button>
         
       </div>
     </div>

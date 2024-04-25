@@ -5,10 +5,13 @@ import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import MobileNav from "./MobileNav";
 import { ArrowRight } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options"
 
 
-const Navbar = () => {
+const Navbar = async () => {
 
+    const session = await getServerSession(authOptions)
     const user = null
 
     return(
@@ -57,6 +60,8 @@ const Navbar = () => {
                                         variant: 'ghost',
                                         className: ' bg-[#60A5FA]'
                                     })}>Get Started <ArrowRight/></Link>)}
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
