@@ -1,5 +1,6 @@
 import 'next-auth'
 import { DefaultSession } from 'next-auth';
+import { redirect } from 'next/dist/server/api-utils';
 
 declare module 'next-auth'{
     interface User{
@@ -23,3 +24,4 @@ declare module 'next-auth/jwt'{
         username?: string
     }
 }
+

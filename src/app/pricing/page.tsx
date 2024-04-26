@@ -1,13 +1,21 @@
 'use client'
 
 import MaxWidthWarpper from "@/components/MaxWidthWrapper"
+import UgradeButton from "@/components/UgradeButton";
+import { buttonVariants } from "@/components/ui/button";
 import { PLANS } from "@/config/stripe";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip";
-import { Check, HelpCircle, Minus } from "lucide-react";
+import { ArrowRight, Check, HelpCircle, Minus } from "lucide-react";
+
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 
 const Pricing = () => {
+
+  const { data: session } = useSession();
+  const user = session?.user
 
   const pricingItems = [
     {
@@ -73,7 +81,7 @@ const Pricing = () => {
   return (
     <>
       <MaxWidthWarpper className=" mb-8 mt-24 text-center max-w-5xl">
-        <div className=" mx-auto mb-10 sm:max-w-lg">
+        <div className=" mx-auto mb-10 sm:max-w-lg ">
           <h1 className=" text-6xl font:bold sm:text-7xl">
             Pricing
           </h1>
@@ -156,6 +164,21 @@ const Pricing = () => {
                     </li>
                   ))}
                 </ul>
+                <div className=" border-t broder-gray-200"/>
+                {plan === "Free"? (<Link href= {user? '/UserDashboard' : 'sign-in'} className={buttonVariants({
+                  className: "w-full",
+                  variant: 'secondary',
+                })}>
+                  {user ? "Upgrade now" : "Sign up"}
+                  <ArrowRight className=" h-5 w-5 ml-1.5"/>
+                </Link>): user ?(
+                  <UgradeButton />
+                ) :(<Link href= 'sign-up' className={buttonVariants({
+                  className: "w-full"
+                })}>
+                  {user ? "Upgrade now" : "Sign up"}
+                  <ArrowRight className=" h-5 w-5 ml-1.5"/>
+                </Link>)}
               </div>
             }
             )}

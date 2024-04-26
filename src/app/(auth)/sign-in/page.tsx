@@ -14,7 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { signInSchema } from '@/schemas/signInSchema';
 import { Loader2 } from 'lucide-react';
@@ -66,6 +66,9 @@ export default function SignInForm() {
     }
     setIsSubmitting(false)
   };
+
+
+  
 
   
 
@@ -139,6 +142,7 @@ export default function SignInForm() {
 
         <Button
         onClick={() =>signIn("google")}
+        
         >Google</Button>
         
       </div>
