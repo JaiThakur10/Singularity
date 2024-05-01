@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth]/options.js", "src/app/Admin/Layout/page.jsx", "src/app/Admin/page.jsx", "src/app/Admin/Layout/page.jsx"],
   "exclude": ["node_modules"]
 }

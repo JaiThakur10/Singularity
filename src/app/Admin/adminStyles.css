@@ -1,0 +1,26 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root{
+    --bgadmin: #151c2c;
+      --bgSoftadmin: #182237;
+      --textadmin: white;
+      --testSoftadmin: #b7bac1;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:  var(--bgadmin);
+    color: var(--textadmin);
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}

@@ -19,10 +19,10 @@ export const products = [
       "https://aceternity.com/images/products/thumbnails/new/cursor.png",
   },
   {
-    title: "Rogue",
+    title: "Digital Agnecy",
     link: "https://userogue.com",
     thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/rogue.png",
+      "/images/Digital_Agency.png",
   },
 
   {

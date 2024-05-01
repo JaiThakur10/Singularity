@@ -4,8 +4,7 @@ import MaxWidthWarpper from '@/components/MaxWidthWrapper';
 import { Button } from '@/components/ui/button';
 import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
-
-import { useForm } from 'react-hook-form';
+import { redirect } from 'next/navigation';
 
 
 function UserDashboard() {
@@ -23,10 +22,11 @@ function UserDashboard() {
  
 
   if (!session || !session.user) {
-    return <div></div>;
+    return <></>
   }
 
   const { username } = session.user as User;
+
 
 
   
@@ -37,7 +37,7 @@ function UserDashboard() {
         <div className=' h-20 w-20 rounded-full bg-gray-100 p-1'>
             <img width={200}  height={200} src="https://api.dicebear.com/8.x/lorelei/svg?seed=Oreo" alt="avatar" />
         </div>
-      <h1 className="text-4xl font-bold mb-4">Hey {`${username}`}! Welcome to Singularity</h1>
+      <h1 className="text-4xl font-bold mb-4">Hey {`${username}`}! Welcome to Singularity </h1>
 
     
 

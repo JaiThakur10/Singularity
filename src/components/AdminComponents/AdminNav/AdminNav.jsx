@@ -1,12 +1,11 @@
-'use client'
 import React from 'react'
 
-function page() {
+const  AdminNav =() => {
   return (
     <div>
-      hey
+      Nav
     </div>
   )
 }
 
-export default page
+export default AdminNav
