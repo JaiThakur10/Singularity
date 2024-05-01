@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './adminSidebar.module.css'
-import { BookDashed, HelpCircle, Settings, ShoppingBag, UserCheck2, UserCircle, Workflow } from 'lucide-react';
+import { BookDashed, HelpCircle, LogOut, Settings, ShoppingBag, UserCheck2, UserCircle, Workflow } from 'lucide-react';
 import { IconFileAnalytics, IconMoneybag } from '@tabler/icons-react';
 import MenuLink from '@/components/AdminComponents/AdminSidebar/menuLink/menuLink'
 import Image from 'next/image';
@@ -12,12 +12,12 @@ const menuItems = [
     list: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/Admin/Dashboard",
         icon: <BookDashed />,
       },
       {
         title: "Users",
-        path: "/dashboard/users",
+        path: "/Admin/Dashboard/Users",
         icon: <UserCircle />,
       },
       {
@@ -92,6 +92,11 @@ function AdminSidebar() {
           </li>
         ))}
         </ul>
+
+        <button className={styles.logout}>
+          <LogOut/>
+          Logout
+        </button>
       
     </div>
   )
